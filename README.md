@@ -1,8 +1,10 @@
+<p align="center">
+  <img src="assets/bytedance.jpg" height="42" align="middle">
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="assets/uom_logo.png" height="70" align="middle">
+</p>
+
 <div align="center">
-
-<img src="assets/bytedance.jpg" height="40">
-
-<img src="assets/uom_logo.png" height="68">
 
 # SafePyramid
 
@@ -37,7 +39,7 @@ A single conversation exercises several judgment mechanisms at once. Decisive an
 
 <p align="center"><img src="assets/rules.jpg" width="100%"></p>
 
-Every conversation and level-specific policy is generated from a schema and quality-controlled through cross-model validation, majority voting, and human review (>90% human–LLM agreement). Models are evaluated under two protocols: **per-policy** evaluation predicts the violated-rule set from the full policy at once, while **per-rule** evaluation judges one target rule at a time and aggregates the binary decisions.
+Every conversation and level-specific policy is generated from a schema and quality-controlled through cross-model validation, majority voting, and human review. Models are evaluated under two protocols: **per-policy** evaluation predicts the violated-rule set from the full policy at once, while **per-rule** evaluation judges one target rule at a time and aggregates the binary decisions.
 
 <p align="center"><img src="assets/pipeline.jpg" width="100%"></p>
 
