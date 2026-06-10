@@ -1,6 +1,8 @@
 <div align="center">
 
-<img src="assets/bytedance.jpg" height="44">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/uom_logo.png" height="66">
+<img src="assets/bytedance.jpg" height="40">
+
+<img src="assets/uom_logo.png" height="68">
 
 # SafePyramid
 
@@ -15,29 +17,29 @@
 
 In real-world deployments, guardrails are expected to flag unsafe user–model interactions according to **application-specific safety policies**, not a fixed, predefined risk taxonomy. SafePyramid studies this setting — **in-context policy guardrailing** — where a model is given a policy *in context* at inference time and must predict the **set of violated rules** for a conversation.
 
+Both paradigms derive from risk taxonomies, but they apply them differently. Fixed-taxonomy guardrailing maps an interaction to a coarse risk category; in-context policy guardrailing instead expands each category into an explicit, auditable policy supplied at inference time and asks the model for the precise set of violated rules — keeping safety criteria transparent, inspectable, traceable, and accountable while remaining adaptable to each application's requirements.
+
 <p align="center"><img src="assets/guardrail.jpg" width="100%"></p>
-<p align="center"><em>Visual comparison between fixed-taxonomy guardrailing and in-context policy guardrailing. Both paradigms are derived from risk taxonomies, but fixed-taxonomy guardrails map user–model interactions to coarse risk categories, while in-context policy guardrails expand each risk category into explicit and auditable safety policies provided in context at inference time. Such policies make safety criteria transparent, inspectable, traceable, and accountable, while remaining adaptable to application-specific requirements.</em></p>
 
 This repository is the evaluation harness: load **any model** — an API LLM or your own fine-tuned guardrail (Hugging Face id or local path) — run it on the benchmark, and get the leaderboard metrics.
 
-| | |
-|---|---|
-| **1,000** multi-turn conversations | **10** safety domains |
-| **3,000** application policies (L0/L1/L2) | **61,699** natural-language rules |
+## The benchmark
 
-The benchmark is a **pyramid** of three capabilities, each adding one source of difficulty while keeping the same task (identify every violated rule):
+SafePyramid spans **1,000** multi-turn conversations (12.8 turns on average) across **10** safety domains, instantiated into **3,000** application policies that together hold **61,699** natural-language rules. It is organized as a **pyramid** of three capabilities, each adding one source of difficulty while keeping the same task — identify every violated rule:
 
 | Level | Capability | What it adds |
 |-------|-----------|--------------|
-| **L0** | Understanding individual rules | Decisive rules (judge from evidence) + distractor rules (resist surface over-matching) |
+| **L0** | Understanding individual rules | Decisive rules (judged from evidence) + distractor rules (resist surface over-matching) |
 | **L1** | Resolving rule dependencies | Exception rules (waive/reinterpret a base rule) + conditional rules (tighten an otherwise-compliant rule) |
-| **L2** | Adapting to novel frameworks | The same structure rewritten under a **fictional** regulatory framework — models must infer it from context alone |
+| **L2** | Adapting to novel frameworks | The same structure rewritten under a **fictional** regulatory framework the model must infer from context alone |
+
+A single conversation exercises several judgment mechanisms at once. Decisive and distractor rules are evaluated directly from conversational evidence, whereas exception and conditional rules can flip a base rule's outcome: an exception can waive an otherwise-violated rule, while a conditional can make an otherwise-compliant rule count as violated.
 
 <p align="center"><img src="assets/rules.jpg" width="100%"></p>
-<p align="center"><em>A shared privacy-domain interaction illustrating how different rule types require different judgment mechanisms in SafePyramid. Decisive and distractor rules are evaluated directly from conversational evidence, whereas exception and conditional rules can flip the base-rule outcome: an exception can waive an otherwise violated base rule, while a conditional can make an otherwise compliant base rule violated.</em></p>
+
+Every conversation and level-specific policy is generated from a schema and quality-controlled through cross-model validation, majority voting, and human review (>90% human–LLM agreement). Models are evaluated under two protocols: **per-policy** evaluation predicts the violated-rule set from the full policy at once, while **per-rule** evaluation judges one target rule at a time and aggregates the binary decisions.
 
 <p align="center"><img src="assets/pipeline.jpg" width="100%"></p>
-<p align="center"><em>Overview of the SafePyramid pipeline. The left panel summarizes the three-level design, from individual rule understanding (L0), to rule dependency resolution (L1), to adaptation to novel policy frameworks (L2), together with benchmark statistics. The middle panel shows how conversations and level-specific policies are generated from schemas and validated through cross-model checking, majority voting, and human review. The right panel compares the two evaluation protocols: per-policy evaluation predicts the violated-rule set from the full policy, while per-rule evaluation judges one target rule at a time and aggregates the binary decisions.</em></p>
 
 ## Metrics
 
