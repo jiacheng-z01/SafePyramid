@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/bytedance.jpg" height="40">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/uom_logo.png" height="52">
+<img src="assets/bytedance.jpg" height="44">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/uom_logo.png" height="66">
 
 # SafePyramid
 
@@ -8,7 +8,7 @@
 
 [![Website](https://img.shields.io/badge/🌐_Website-SafePyramid-1f6feb)](https://jiacheng-z01.github.io/SafePyramid/)
 [![Hugging Face](https://img.shields.io/badge/🤗_Hugging_Face-Dataset-ffce1c)](https://huggingface.co/datasets/jiacheng-z01/SafePyramid)
-[![arXiv](https://img.shields.io/badge/📄_Paper-arXiv-b31b1b)](https://arxiv.org/abs/XXXX.XXXXX)
+[![Paper](https://img.shields.io/badge/📄_Paper-PDF-b31b1b)](assets/SafePyramid.pdf)
 [![License](https://img.shields.io/badge/License-Apache_2.0-green)](LICENSE)
 
 </div>
