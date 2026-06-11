@@ -68,8 +68,8 @@ The benchmark is hosted on the Hub and downloaded + cached on first use. Two JSO
 
 | File | Size | Use |
 |------|------|-----|
-| `benchmark.json` | ~87 MB | **Main** file — what everything below loads by default |
-| `benchmark_with_evidence.json` | ~408 MB | Same cases **plus** the per-validator audit trail behind each ground-truth label |
+| `benchmark.json` | ~87&nbsp;MB | **Main** file — what everything below loads by default |
+| `benchmark_with_evidence.json` | ~408&nbsp;MB | Same cases **plus** the per-validator audit trail behind each ground-truth label |
 
 ```python
 from safepyramid import load_benchmark
@@ -101,9 +101,9 @@ API keys are read from **environment variables only** — never from config file
 ```bash
 export OPENAI_API_KEY=...     # or ANTHROPIC_API_KEY / GOOGLE_API_KEY / XAI_API_KEY / OPENROUTER_API_KEY
 
-safepyramid eval --model gpt-5.2          --backend openai    --reasoning-effort high
-safepyramid eval --model claude-opus-4-6  --backend anthropic
-safepyramid eval --model gemini-2.5-pro   --backend gemini    --reasoning-effort high
+safepyramid eval --model gpt-5.5           --backend openai    --reasoning-effort high
+safepyramid eval --model claude-opus-4.7   --backend anthropic
+safepyramid eval --model gemini-3.5-flash  --backend gemini    --reasoning-effort high
 
 # any OpenAI-compatible endpoint (vLLM serve, gateways, ...)
 safepyramid eval --model my-model --backend openai_compatible \
@@ -151,7 +151,7 @@ from safepyramid import load_benchmark, evaluate
 metadata, cases = load_benchmark(level="L0", limit=50)      # a 50-case smoke run
 
 summaries = evaluate(
-    {"name": "gpt-5.2", "type": "api", "backend": "openai", "reasoning_effort": "high"},
+    {"name": "gpt-5.5", "type": "api", "backend": "openai", "reasoning_effort": "high"},
     cases,
 )
 
@@ -177,7 +177,7 @@ Result files are named `results_<RUN_ID>_<model>.jsonl`; `RUN_ID` defaults to a 
 The second protocol: each rule is judged **independently** (one binary verdict per (case, rule) pair), then the judgments are aggregated back into per-case predicted sets and scored with the *same* RMR / RMR@1.0 / RDR yardstick. It isolates where models fail — rule understanding vs. full-policy composition.
 
 ```bash
-safepyramid per-rule --model gpt-5.2 --backend openai --level L0
+safepyramid per-rule --model gpt-5.5 --backend openai --level L0
 safepyramid per-rule --config configs/models.yaml
 ```
 
@@ -217,7 +217,7 @@ A note on prompting: the evaluation prompt deliberately contains **only** the vi
 
 ## A glimpse of the results
 
-In-context policy guardrailing is far from solved. Exact-match accuracy drops sharply up the pyramid — e.g. GPT-5.5 goes **54.0% (L0) → 35.3% (L1) → 12.9% (L2)** — and the gap is consistent across model families. See the [project page](#) for the interactive leaderboard across 15 systems, both protocols, all metrics, levels, and domains.
+In-context policy guardrailing is far from solved. Exact-match accuracy drops sharply up the pyramid — e.g. GPT-5.5 goes **54.0% (L0) → 35.3% (L1) → 12.9% (L2)** — and the gap is consistent across model families. See the [project page](https://jiacheng-z01.github.io/SafePyramid/) for the interactive leaderboard across 15 models, both protocols, all metrics, levels, and domains.
 
 ## Security
 
@@ -226,12 +226,14 @@ API keys live in environment variables only; `.gitignore` blocks the common secr
 ## Citation
 
 ```bibtex
-@article{zhang2026safepyramid,
-  title   = {SafePyramid: A Hierarchical Benchmark for In-context Policy Guardrailing},
-  author  = {Zhang, Jiacheng and He, Haoyu and Zhang, Sen and Wang, Shen and
-             Xu, Xiaolei and Sun, Yuhao and Shen, Meng and Liu, Feng},
-  year    = {2026},
-  journal = {arXiv preprint}
+@misc{zhang2026safepyramid,
+      title={SafePyramid: A Hierarchical Benchmark for In-context Policy Guardrailing}, 
+      author={Jiacheng Zhang and Haoyu He and Sen Zhang and Shen Wang and Xiaolei Xu and Yuhao Sun and Meng Shen and Feng Liu},
+      year={2026},
+      eprint={}, 
+      archivePrefix={}, 
+      primaryClass={}, 
+      url={}, 
 }
 ```
 

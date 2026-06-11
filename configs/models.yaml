@@ -4,7 +4,7 @@
 #   safepyramid eval     --config configs/models.yaml
 #   safepyramid per-rule --config configs/models.yaml
 #
-# (Or skip the config entirely: `safepyramid eval --model gpt-5.2 --backend openai`.)
+# (Or skip the config entirely: `safepyramid eval --model gpt-5.5 --backend openai`.)
 #
 # API keys are read from environment variables ONLY — never put a key here.
 # Each backend reads its standard variable (OPENAI_API_KEY, ANTHROPIC_API_KEY,
@@ -13,7 +13,7 @@
 
 models:
   # ---- API model (fill in the AK env var and run) --------------------
-  - name: "gpt-5.2"                 # any API model id
+  - name: "gpt-5.5"                 # any API model id
     type: api
     backend: openai                 # openai | anthropic | gemini | xai | openrouter | openai_compatible
     reasoning_effort: "high"        # optional: low | medium | high | xhigh

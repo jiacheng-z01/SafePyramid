@@ -146,7 +146,7 @@ function render(){
   // meta + footnote
   const pretty = {RMR:'RMR',['RMR@1.0']:'Exact match',RDR:'RDR'}[metric];
   document.getElementById('lb-meta').innerHTML =
-    `${state.protocol==='policy'?'Per-policy':'Per-rule'} · ${pretty}<br>${state.domain==='All'?'All domains':state.domain} · ${rows.length} systems`;
+    `${state.protocol==='policy'?'Per-policy':'Per-rule'} · ${pretty}<br>${state.domain==='All'?'All domains':state.domain} · ${rows.length} models`;
 
   const notes = {
     RMR:'<b>RMR</b> — rule matching rate, averaged over thresholds τ∈{0.7,0.8,0.9,1.0}. Higher is better.',
